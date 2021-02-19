@@ -3,10 +3,11 @@ export default function (state = {}, action) {
     case "SET_USER":
       return {
         ...state,
-        user: {
+        account: {
           name: action.payload.name,
           email: action.payload.email,
           password: action.payload.password,
+          id: action.payload._id,
         },
       };
     case "ADD_SONGS_LIKED":

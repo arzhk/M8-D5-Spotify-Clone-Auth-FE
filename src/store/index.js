@@ -21,7 +21,7 @@ const initialState = {
   },
   currentAlbum: {},
   user: {
-    account: { name: "", email: "", password: "" },
+    account: { name: "", email: "", id: "" },
     liked: [],
     playlists: [],
   },

@@ -1,9 +1,12 @@
 @font-face {
   font-family: "Circular";
-  src: url("https://www.bu.edu/cdn/fonts/Circular/Circular-Bold.eot");
-  src: url("https://www.bu.edu/cdn/fonts/Circular/Circular-Bold.eot?#iefix") format("embedded-opentype"),
-    url("https://www.bu.edu/cdn/fonts/Circular/Circular-Bold.woff") format("woff"),
-    url("https://www.bu.edu/cdn/fonts/Circular/Circular-Bold.ttf") format("truetype");
+  src: url("https://yabba-dabba-duls-cors-anywhere.herokuapp.com/https://www.bu.edu/cdn/fonts/Circular/Circular-Bold.eot");
+  src: url("https://yabba-dabba-duls-cors-anywhere.herokuapp.com/https://www.bu.edu/cdn/fonts/Circular/Circular-Bold.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://yabba-dabba-duls-cors-anywhere.herokuapp.com/https://www.bu.edu/cdn/fonts/Circular/Circular-Bold.woff")
+      format("woff"),
+    url("https://yabba-dabba-duls-cors-anywhere.herokuapp.com/https://www.bu.edu/cdn/fonts/Circular/Circular-Bold.ttf")
+      format("truetype");
   font-style: normal;
   font-weight: 700;
 }
@@ -53,6 +56,11 @@ body {
 #sing_in:hover {
   background: rgb(30, 215, 96);
 }
+
+#sing_in:disabled {
+  background-color: rgb(189, 189, 189);
+}
+
 .sign_title {
   color: #000 !important;
 }

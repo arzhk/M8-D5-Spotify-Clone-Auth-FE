@@ -1,21 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Col, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 
-const mapStateToProps = (state) => state;
-
-const mapDispatchToProps = (dispatch) => ({
-  addUserHandler: (user) => dispatch({ type: "SET_USER", payload: user }),
-});
-
-function Registration({ addUserHandler }) {
+function Registration({ addUserHandler, history }) {
   const [email, setEmail] = useState("");
+  const [confirmEmail, setConfirmEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const registrationHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:3003/users/register", {
+        method: "POST",
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          name: name,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setShowSuccess(true);
+        setEmail("");
+        setConfirmEmail("");
+        setName("");
+        setPassword("");
+        setTimeout(() => {
+          history.push("/login");
+        }, 1000);
+      }
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleInputMail = (e) => {
     setEmail(e.target.value);
+  };
+  const handleConfirmInputMail = (e) => {
+    setConfirmEmail(e.target.value);
   };
   const handleInputName = (e) => {
     setName(e.target.value);
@@ -23,6 +53,22 @@ function Registration({ addUserHandler }) {
   const handleInputPassword = (e) => {
     setPassword(e.target.value);
   };
+
+  const signUpButtonEnabler = () => {
+    if (email.length !== 0 && confirmEmail.length !== 0 && name.length !== 0 && password.length !== 0) {
+      if (email === confirmEmail) {
+        setIsDisabled(false);
+      } else {
+        setIsDisabled(true);
+      }
+    } else {
+      setIsDisabled(true);
+    }
+  };
+
+  useEffect(() => {
+    signUpButtonEnabler();
+  }, [email, confirmEmail, name, password]);
 
   return (
     <div className="container_sign_in">
@@ -46,25 +92,48 @@ function Registration({ addUserHandler }) {
           <div className="hr"></div>
         </div>
         <div className="text-center mt-3 mb-3">Sing up with your email address</div>
-        <Form onSubmit={(e) => addUserHandler({ name: name, email: email, password: password }, e.preventDefault())}>
+        <Form onSubmit={(event) => registrationHandler(event)}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>What's your email?</Form.Label>
-            <Form.Control type="email" placeholder="Enter your email." onChange={handleInputMail} />
+            <Form.Control
+              type="email"
+              placeholder="Enter your email."
+              value={email}
+              onChange={handleInputMail}
+              required
+            />
           </Form.Group>
 
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Confirm your email</Form.Label>
-            <Form.Control type="email" placeholder="Enter your email again." />
+            <Form.Control
+              type="email"
+              placeholder="Enter your email again."
+              value={confirmEmail}
+              onChange={handleConfirmInputMail}
+            />
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Create a password</Form.Label>
-            <Form.Control type="password" placeholder="Create a password." onChange={handleInputPassword} />
+            <Form.Control
+              type="password"
+              placeholder="Create a password."
+              value={password}
+              onChange={handleInputPassword}
+              required
+            />
           </Form.Group>
 
           <Form.Group controlId="formBasicName">
             <Form.Label>What should we call you?</Form.Label>
-            <Form.Control type="name" placeholder="Enter a profile name." onChange={handleInputName} />
+            <Form.Control
+              type="name"
+              placeholder="Enter a profile name."
+              value={name}
+              onChange={handleInputName}
+              required
+            />
             <h6>This appears on your profile.</h6>
           </Form.Group>
 
@@ -116,7 +185,7 @@ function Registration({ addUserHandler }) {
             collects, uses, shares and protects your personal data please read Spotify's <g>Privacy Policy</g>.
           </small>
 
-          <button id="sing_in" href="/login.html" className="col-12 mt-2" type="submit">
+          <button id="sing_in" href="/login.html" className="col-12 mt-2" type="submit" disabled={isDisabled}>
             SIGN UP
           </button>
 
@@ -129,4 +198,4 @@ function Registration({ addUserHandler }) {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Registration);
+export default Registration;

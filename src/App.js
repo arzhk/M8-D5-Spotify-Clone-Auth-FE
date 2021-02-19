@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { connect } from "react-redux";
@@ -12,24 +12,27 @@ import PlayerBar from "./components/PlayerBar";
 import ArtistPage from "./components/ArtistPage";
 import Register from "./components/Registration";
 import Login from "./components/Login/Login";
+import { checkLoginHandler } from "./components/checkLogin";
 
 const mapStateToProps = (state) => state;
 
 const mapDispatchToProps = (dispatch) => ({
-  /*  storeFetch: (fetchResults) => dispatch({ type: "ADD_SONGS_TRENDING", payload: fetchResults }), */
+  setUser: (user) => dispatch({ type: "SET_USER", payload: user }),
 });
 
-function App({ user }) {
-  const loginHandler = async () => {
-    try {
-    } catch (err) {
-      console.log(err);
-    }
+function App(props) {
+  const start = async () => {
+    const data = await checkLoginHandler();
+    console.log(data);
   };
+
+  useEffect(() => {
+    start();
+  }, []);
 
   return (
     <Router>
-      {!user.account.name && (
+      {!props.user.account.name && (
         <>
           <Redirect to="/login" />
           <Route path="/login" exact component={Login} />
@@ -37,7 +40,7 @@ function App({ user }) {
           <Route path="/" exact component={Home} />
         </>
       )}
-      {user.account.name && (
+      {props.user.account.name && (
         <>
           <Redirect to="/home" />
           <Route path="/" component={Navigation} />
