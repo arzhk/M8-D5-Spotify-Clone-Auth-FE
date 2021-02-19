@@ -1,0 +1,369 @@
+@font-face {
+  font-family: "Circular";
+  src: url("https://www.bu.edu/cdn/fonts/Circular/Circular-Bold.eot%22");
+  src: url("https://www.bu.edu/cdn/fonts/Circular/Circular-Bold.eot?#iefix%22") format("embedded-opentype"),
+    url("https://www.bu.edu/cdn/fonts/Circular/Circular-Bold.woff%22") format("woff"),
+    url("https://www.bu.edu/cdn/fonts/Circular/Circular-Bold.ttf%22") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+}
+
+body {
+  font-family: "Circular", Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.logo {
+  margin: 0px 0px 30px;
+  padding: 25px 0px 10px;
+  border-bottom: 1px solid rgb(199, 198, 198);
+}
+
+.error_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 48px;
+  margin-bottom: 10px;
+  background-color: #e22134;
+  color: white;
+  font-size: 12px;
+}
+p.error_msg {
+  text-align: center;
+  margin: 0px;
+}
+.wrapper {
+  width: 450px;
+  height: 725px;
+  margin: 0 auto;
+}
+
+a.button-fb {
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 30px;
+  background-color: #3b5998;
+}
+a.button-ap {
+  background-color: #000;
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 30px;
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+a.button-sp {
+  background-color: #28a5540c;
+  border: 3px solid #28a554;
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 30px;
+  opacity: 1;
+  transition: background-color 0.25s ease;
+  color: #28a554;
+}
+
+a.button-sp:hover {
+  background-color: #15883e;
+}
+
+a.button-gg,
+a.button-num,
+a.button-link {
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 30px;
+  background-color: #ffffff;
+  color: #616467;
+  border: 2px solid #616467;
+}
+
+a.button-ap:hover {
+  opacity: 0.8;
+  background-color: #000;
+}
+
+a.button-link:hover,
+a.button-gg:hover,
+a.button-num:hover {
+  background-color: #616467;
+  border: 2px solid #616467;
+}
+.button-wrapper {
+  margin-bottom: 10px;
+}
+
+.divider {
+  border-top: 1px solid #d9dadc;
+  display: block;
+  line-height: 1px;
+  margin: 15px 0;
+  position: relative;
+  text-align: center;
+}
+strong.divider-title {
+  background: #fff;
+  font-size: 12px;
+  letter-spacing: 1px;
+  padding: 0 20px;
+}
+#fab-icon {
+  margin: 0px 14px 0px 0px;
+}
+
+a.password-rem {
+  color: #616467;
+}
+a.password-rem:hover {
+  color: #15883e;
+}
+/* The container */
+.checkwrapper {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+}
+
+/* Hide the browser's default checkbox */
+.checkwrapper input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+}
+
+/* When the checkbox is checked, add a green background */
+.checkwrapper input:checked ~ .checkmark {
+  background-color: #15883e;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkwrapper input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkwrapper .checkmark:after {
+  left: 6px;
+  top: 3px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+.btn {
+  border: none;
+}
+
+.log-in-btn {
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 25px;
+  background-color: #15883e;
+  border: none;
+  padding: 10px 80px;
+  color: white !important;
+}
+
+.log-in-btn:hover {
+  background-color: #259e50;
+}
+
+/*Signup css*/
+div.container.signup {
+  width: 450px;
+  padding: 0px;
+}
+div.signup-header {
+  width: 100%;
+  padding: 40px 0px 32px;
+}
+.signup-header-text {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 40px 0px 0px;
+  color: #181818;
+}
+
+a.link-fb,
+button.sign-up {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  line-height: 16px;
+  padding: 16px 12px;
+  border: 0;
+  border-radius: 500px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  font-weight: 900px;
+  text-align: center;
+  color: #fff;
+  vertical-align: middle;
+  text-decoration: none;
+  margin: 0px 0px 22px;
+}
+a.link-fb {
+  background-color: rgb(58, 88, 151);
+}
+
+button.sign-up {
+  background-color: #1db954;
+}
+
+a.link-fb:hover {
+  color: white;
+}
+h2.form-header {
+  font-size: 18px;
+  color: rgb(24, 24, 24);
+  font-weight: 700;
+  line-height: 26px;
+  letter-spacing: 0px;
+}
+
+.myfield {
+  width: 100%;
+  padding-bottom: 24px;
+}
+input#email,
+input#email_confirm,
+input#email_profilename,
+input#email_password {
+  width: 100%;
+  height: 48px;
+  padding: 14px;
+}
+
+.lab {
+  font-weight: 700;
+  color: #181818;
+  font-size: 14px;
+}
+p.lab {
+  margin: 0px;
+  padding: 0px 0px 8px;
+}
+label.d-block {
+  color: #181818;
+  font-size: 14px;
+  margin: 0px;
+  padding: 0px 0px 8px;
+}
+.mytext {
+  font-size: 14px;
+  color: #181818;
+  margin: 8px 0px 0px;
+}
+
+.myday {
+  width: 90px;
+  height: 76px;
+}
+.mymonth {
+  width: 202.5px;
+  height: 76px;
+}
+.myyear {
+  width: 112.5;
+  height: 76px;
+}
+input#day {
+  width: 90px;
+  height: 48px;
+  padding: 14px;
+}
+select#month {
+  width: 202.5px;
+  height: 48px;
+  padding: 14px 44px 14px 14px;
+}
+input#year {
+  height: 48px;
+  width: 112.5px;
+  padding: 14px;
+}
+
+.mygender {
+  padding: 0px 24px 0px 12px;
+  font-size: 14px;
+  color: #181818;
+}
+
+.data-share {
+  color: #181818;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25;
+  padding: 0px 10px 0px 26px;
+}
+
+.link-texts {
+  color: #1db954;
+  text-decoration: underline;
+  text-decoration-color: #1db954;
+  font-size: 12px;
+}
+.link-texts:hover {
+  opacity: 0.8;
+}
+p.main-text {
+  font-size: 12px;
+  padding: 0px 0px 12px;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:active:focus:not(:disabled):not(.disabled),
+.btn:focus,
+.btn:active,
+.btn:hover {
+  box-shadow: none !important;
+  outline: 0;
+}
+
+.btn-back {
+  background-color: #000;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 14px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.btn-back:hover {
+  color: rgba(255, 255, 255, 1);
+}

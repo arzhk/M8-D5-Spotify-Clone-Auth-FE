@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Col, Button, Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 const mapStateToProps = (state) => state;
@@ -8,7 +9,7 @@ const mapDispatchToProps = (dispatch) => ({
   addUserHandler: (user) => dispatch({ type: "SET_USER", payload: user }),
 });
 
-function SignInPage({ addUserHandler }) {
+function Registration({ addUserHandler }) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -115,18 +116,17 @@ function SignInPage({ addUserHandler }) {
             collects, uses, shares and protects your personal data please read Spotify's <g>Privacy Policy</g>.
           </small>
 
-          {/* <Button variant="primary" type="submit">
-            Submit
-          </Button> */}
           <button id="sing_in" href="/login.html" className="col-12 mt-2" type="submit">
             SIGN UP
           </button>
 
-          <div className="text-center mb-3">Have an account? Log in.</div>
+          <div className="text-center mb-3">
+            Have an account? <Link to="/login">Log in</Link>.
+          </div>
         </Form>
       </Col>
     </div>
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignInPage);
+export default connect(mapStateToProps, mapDispatchToProps)(Registration);
