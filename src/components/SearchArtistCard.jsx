@@ -3,14 +3,14 @@ import { Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function SearchArtistCard({ artist }) {
-  console.log(artist);
   return (
-    <Col
-      sm={12}
+    <div
+      /*       sm={12}
       md={6}
       lg={4}
       xl={3}
-      className="d-flex justify-content-center justify-content-md-start px-0 mb-3 fade-in"
+      className="d-flex justify-content-center justify-content-md-start px-0 mb-3 fade-in" */
+      className="px-2 py-2"
     >
       <Link to={"/artist/" + artist.id}>
         <div className="album-card">
@@ -18,7 +18,7 @@ function SearchArtistCard({ artist }) {
           <h5>{artist.name}</h5>
         </div>
       </Link>
-    </Col>
+    </div>
   );
 }
 

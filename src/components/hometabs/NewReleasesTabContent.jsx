@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Spinner } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 import HomeAlbumCard from "../HomeAlbumCard";
 import { connect } from "react-redux";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 const mapStateToProps = (state) => state;
 
@@ -32,7 +33,7 @@ function NewReleasesTabContent(props) {
           return data.playlists.data;
         }
       } else {
-        alert("There was an error when fetching");
+        console.log("There was an error when fetching");
       }
     } catch (e) {
       console.error(`API ERROR : ${e.message}`);
@@ -40,7 +41,7 @@ function NewReleasesTabContent(props) {
   };
 
   const startNew = async () => {
-    setNewReleases((await fetchAlbumDataHandler("playlist/63141574?limit=40")).splice(0, 15));
+    await setNewReleases(await fetchAlbumDataHandler("playlist/63141574?limit=15"));
     setNewReleasesLoaded(true);
 
     props.storeFetch(newReleases);
@@ -76,16 +77,15 @@ function NewReleasesTabContent(props) {
         </div>
         <div id="popular-albums-container" className="mb-0 mb-xl-4">
           <div id="best-new-releases-row" className="row mb-0 mb-xl-4">
-            {newReleasesLoaded ? (
-              newReleases.map((album, index) => <HomeAlbumCard key={index} album={album} />)
-            ) : (
-              <>
-                <h5 className="d-inline-block mb-0 mr-2 ml-3" style={{ color: "white" }}>
-                  Loading...
-                </h5>
-                <Spinner animation="border" variant="primary" disabled />
-              </>
-            )}
+            {newReleasesLoaded
+              ? newReleases.map((album, index) => <HomeAlbumCard key={index} album={album} />)
+              : [...Array(newReleases.length)].map((loader) => (
+                  <Col sm={12} md={6} lg={4} xl={3} className="col-xxl-2 mb-2 pr-3 pr-md-2 px-lg-2 fade-in">
+                    <SkeletonTheme color="rgba(255,255,255,0.05)" highlightColor="rgba(255,255,255,0.08)">
+                      <Skeleton height={308} />
+                    </SkeletonTheme>
+                  </Col>
+                ))}
           </div>
         </div>
       </div>

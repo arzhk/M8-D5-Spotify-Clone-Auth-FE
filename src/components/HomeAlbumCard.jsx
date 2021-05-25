@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Col } from "react-bootstrap";
+import Skeleton from "react-loading-skeleton";
 
 function HomeAlbumCard({ album }) {
   return (

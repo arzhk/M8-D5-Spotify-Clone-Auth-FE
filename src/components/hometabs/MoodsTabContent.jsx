@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Spinner } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 import HomeAlbumCard from "../HomeAlbumCard";
 import { connect } from "react-redux";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 const mapStateToProps = (state) => state;
 
@@ -38,7 +39,7 @@ function MoodsTabContent(props) {
           return data.playlists.data;
         }
       } else {
-        alert("There was an error when fetching");
+        console.log("There was an error when fetching");
       }
     } catch (e) {
       console.error(`API ERROR : ${e.message}`);
@@ -46,11 +47,11 @@ function MoodsTabContent(props) {
   };
 
   const startNew = async () => {
-    setEdmAlbums((await fetchAlbumDataHandler("playlist/4503899902?limit=30")).splice(0, 10));
+    await setEdmAlbums(await fetchAlbumDataHandler("playlist/4503899902?limit=10"));
     setEdmAlbumsLoaded(true);
-    setWorkoutAlbums((await fetchAlbumDataHandler("playlist/1857061922?limit=30")).splice(0, 10));
+    await setWorkoutAlbums(await fetchAlbumDataHandler("playlist/1857061922?limit=10"));
     setWorkoutAlbumsLoaded(true);
-    setChillAlbums((await fetchAlbumDataHandler("playlist/3338949242?limit=30")).splice(0, 10));
+    await setChillAlbums(await fetchAlbumDataHandler("playlist/3338949242?limit=10"));
     setChillAlbumsLoaded(true);
 
     props.storeFetch({ edmAlbums: edmAlbums });
@@ -107,16 +108,15 @@ function MoodsTabContent(props) {
         </div>
         <div id="edm-container" className="mb-0 mb-xl-4">
           <div id="edm-row" className="row mb-0 mb-xl-4">
-            {edmAlbumsLoaded ? (
-              edmAlbums.map((album, index) => <HomeAlbumCard key={index} album={album} />)
-            ) : (
-              <>
-                <h5 className="d-inline-block mb-0 mr-2 ml-3" style={{ color: "white" }}>
-                  Loading...
-                </h5>
-                <Spinner animation="border" variant="primary" disabled />
-              </>
-            )}
+            {edmAlbumsLoaded
+              ? edmAlbums.map((album, index) => <HomeAlbumCard key={index} album={album} />)
+              : [...Array(edmAlbums.length)].map((loader) => (
+                  <Col sm={12} md={6} lg={4} xl={3} className="col-xxl-2 mb-2 pr-3 pr-md-2 px-lg-2 fade-in">
+                    <SkeletonTheme color="rgba(255,255,255,0.05)" highlightColor="rgba(255,255,255,0.08)">
+                      <Skeleton height={308} />
+                    </SkeletonTheme>
+                  </Col>
+                ))}
           </div>
         </div>
         <div className="album-header-wrapper d-flex justify-content-between align-items-center">
@@ -124,16 +124,15 @@ function MoodsTabContent(props) {
         </div>
         <div id="workout-mood-albums-container" className="mb-0 mb-xl-4">
           <div id="workout-mood-row" className="row mb-0 mb-0 mb-xl-4">
-            {workoutAlbumsLoaded ? (
-              workoutAlbums.map((album, index) => <HomeAlbumCard key={index} album={album} />)
-            ) : (
-              <>
-                <h5 className="d-inline-block mb-0 mr-2 ml-3" style={{ color: "white" }}>
-                  Loading...
-                </h5>
-                <Spinner animation="border" variant="primary" disabled />
-              </>
-            )}
+            {workoutAlbumsLoaded
+              ? workoutAlbums.map((album, index) => <HomeAlbumCard key={index} album={album} />)
+              : [...Array(workoutAlbums.length)].map((loader) => (
+                  <Col sm={12} md={6} lg={4} xl={3} className="col-xxl-2 mb-2 pr-3 pr-md-2 px-lg-2 fade-in">
+                    <SkeletonTheme color="rgba(255,255,255,0.05)" highlightColor="rgba(255,255,255,0.08)">
+                      <Skeleton height={308} />
+                    </SkeletonTheme>
+                  </Col>
+                ))}
           </div>
         </div>
         <div className="album-header-wrapper d-flex justify-content-between align-items-center">
@@ -141,16 +140,15 @@ function MoodsTabContent(props) {
         </div>
         <div id="chill-albums-container" className="mb-0 mb-xl-4">
           <div id="chill-mood-row" className="row mb-0 mb-xl-4">
-            {chillAlbumsLoaded ? (
-              chillAlbums.map((album, index) => <HomeAlbumCard key={index} album={album} />)
-            ) : (
-              <>
-                <h5 className="d-inline-block mb-0 mr-2 ml-3" style={{ color: "white" }}>
-                  Loading...
-                </h5>
-                <Spinner animation="border" variant="primary" disabled />
-              </>
-            )}
+            {chillAlbumsLoaded
+              ? chillAlbums.map((album, index) => <HomeAlbumCard key={index} album={album} />)
+              : [...Array(chillAlbums.length)].map((loader) => (
+                  <Col sm={12} md={6} lg={4} xl={3} className="col-xxl-2 mb-2 pr-3 pr-md-2 px-lg-2 fade-in">
+                    <SkeletonTheme color="rgba(255,255,255,0.05)" highlightColor="rgba(255,255,255,0.08)">
+                      <Skeleton height={308} />
+                    </SkeletonTheme>
+                  </Col>
+                ))}
           </div>
         </div>
       </div>

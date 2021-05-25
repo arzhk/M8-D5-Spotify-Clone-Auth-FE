@@ -10,8 +10,6 @@ import YourLibrary from "./components/YourLibrary";
 import AlbumPage from "./components/AlbumPage";
 import PlayerBar from "./components/PlayerBar";
 import ArtistPage from "./components/ArtistPage";
-import Register from "./components/Registration";
-import Login from "./components/Login/Login";
 import { checkLoginHandler } from "./components/checkLogin";
 
 const mapStateToProps = (state) => state;
@@ -32,28 +30,16 @@ function App(props) {
 
   return (
     <Router>
-      {!props.user.account.name && (
-        <>
-          <Redirect to="/login" />
-          <Route path="/login" exact component={Login} />
-          <Route path="/register" exact component={Register} />
-          <Route path="/" exact component={Home} />
-        </>
-      )}
-      {props.user.account.name && (
-        <>
-          <Redirect to="/home" />
-          <Route path="/" component={Navigation} />
-          <Switch>
-            <Route path="/home" component={Home} />
-            <Route path="/search" exact component={Search} />
-            <Route path="/library" component={YourLibrary} />
-            <Route path="/album/" component={AlbumPage} />
-            <Route path="/artist/:id" component={ArtistPage} />
-          </Switch>
-          <Route path="/" component={PlayerBar} />
-        </>
-      )}
+      <Redirect to="/home" />
+      <Route path="/" component={Navigation} />
+      <Switch>
+        <Route path="/home" component={Home} />
+        <Route path="/search" exact component={Search} />
+        <Route path="/library" component={YourLibrary} />
+        <Route path="/album/" component={AlbumPage} />
+        <Route path="/artist/:id" component={ArtistPage} />
+      </Switch>
+      <Route path="/" component={PlayerBar} />
     </Router>
   );
 }

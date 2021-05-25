@@ -20,7 +20,7 @@ function Home() {
 
   return (
     <Route
-      path="/home"
+      path="/"
       render={() => {
         return (
           <aside id="main" className={`${activeBackgroundHandler(currentActiveLink)}-bg`}>

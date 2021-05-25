@@ -1,13 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Col, Alert } from "react-bootstrap";
 import SearchTrackCard from "./SearchTrackCard";
 import SearchArtistCard from "./SearchArtistCard";
-import { Col, Alert } from "react-bootstrap";
+import GenreCard from "./GenreCard";
 
 function Search() {
   const [searchInput, setSearchInput] = React.useState("");
   const [searchResults_tracks, setSearchResults_tracks] = React.useState([]);
   const [searchResults_artists, setSearchResults_artists] = React.useState([]);
   const searchBox = React.useRef(null);
+
+  const genres = [
+    { id: 0, text: "All" },
+    { id: 132, text: "Pop" },
+    { id: 116, text: "Rap/Hip Hop" },
+    { id: 152, text: "Rock" },
+    { id: 113, text: "Dance" },
+    { id: 165, text: "R&B" },
+    { id: 85, text: "Alternative" },
+    { id: 106, text: "Electro" },
+    { id: 466, text: "Folk" },
+    { id: 144, text: "Reggae" },
+    { id: 129, text: "Jazz" },
+    { id: 98, text: "Classical" },
+    { id: 173, text: "Films/Games" },
+    { id: 169, text: "Soul & Funk" },
+    { id: 2, text: "African Music" },
+    { id: 12, text: "Arabic Music" },
+    { id: 16, text: "Asian Music" },
+    { id: 153, text: "Blues" },
+    { id: 75, text: "Brazilian Music" },
+    { id: 81, text: "Indian Music" },
+    { id: 95, text: "Kids" },
+    { id: 197, text: "Latin Music" },
+  ];
 
   const fetchHandler_tracks = async (searchterm) => {
     try {
@@ -51,7 +77,7 @@ function Search() {
     setSearchResults_artists(await fetchHandler_artists(event.target.value));
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     searchBox.current.focus();
   });
 
@@ -117,6 +143,9 @@ function Search() {
           </h4>
           <div id="genres-wrapper" className="swing-in-top-fwd-dly">
             {/* INSERT BROWSE CARDS HERE */}
+            {genres.map((genre, index) => (
+              <GenreCard key={index} data={genre} />
+            ))}
           </div>
         </div>
       </div>

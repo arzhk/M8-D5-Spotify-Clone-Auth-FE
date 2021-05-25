@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Spinner } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 import HomePlaylistAlbumCard from "../HomePlaylistAlbumCard";
 import { connect } from "react-redux";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 const mapStateToProps = (state) => state;
 
@@ -25,7 +26,7 @@ function PodcastTabContent(props) {
       if (!data.error) {
         return data.podcasts.data;
       } else {
-        alert("There was an error when fetching");
+        console.log("There was an error when fetching");
       }
     } catch (e) {
       console.error(`API ERROR : ${e.message}`);
@@ -69,18 +70,17 @@ function PodcastTabContent(props) {
         </div>
         <div id="top-podcasts-container" className="mb-0 mb-xl-4">
           <div id="top-podcasts-row" className="row mb-0 mb-xl-4">
-            {topPodcastsLoaded ? (
-              topPodcasts
-                .filter((e) => e !== undefined)
-                .map((playlist, index) => <HomePlaylistAlbumCard key={index} playlist={playlist} />)
-            ) : (
-              <>
-                <h5 className="d-inline-block mb-0 mr-2 ml-3" style={{ color: "white" }}>
-                  Loading...
-                </h5>
-                <Spinner animation="border" variant="primary" disabled />
-              </>
-            )}
+            {topPodcastsLoaded
+              ? topPodcasts
+                  .filter((e) => e !== undefined)
+                  .map((playlist, index) => <HomePlaylistAlbumCard key={index} playlist={playlist} />)
+              : [...Array(topPodcasts.length)].map((loader) => (
+                  <Col sm={12} md={6} lg={4} xl={3} className="col-xxl-2 mb-2 pr-3 pr-md-2 px-lg-2 fade-in">
+                    <SkeletonTheme color="rgba(255,255,255,0.05)" highlightColor="rgba(255,255,255,0.08)">
+                      <Skeleton height={308} />
+                    </SkeletonTheme>
+                  </Col>
+                ))}
           </div>
         </div>
       </div>

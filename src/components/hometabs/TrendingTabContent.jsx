@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import HomeAlbumCard from "../HomeAlbumCard";
 import HomePlaylistAlbumCard from "../HomePlaylistAlbumCard";
-import { Spinner } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 import { connect } from "react-redux";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 const mapStateToProps = (state) => state;
 
@@ -38,7 +39,7 @@ function TrendingTabContent(props) {
           return data.playlists.data;
         }
       } else {
-        alert("There was an error when fetching");
+        console.log("There was an error when fetching");
       }
     } catch (e) {
       console.error(`API ERROR : ${e.message}`);
@@ -46,10 +47,10 @@ function TrendingTabContent(props) {
   };
 
   const startNew = async () => {
-    await setPopularAlbums((await fetchAlbumDataHandler("playlist/3155776842?limit=40")).splice(0, 15));
+    await setPopularAlbums(await fetchAlbumDataHandler("playlist/3155776842?limit=15"));
     setPopularAlbumsLoaded(true);
 
-    await setTrendingNow((await fetchAlbumDataHandler("playlist/1111142221?limit=40")).splice(0, 15));
+    await setTrendingNow(await fetchAlbumDataHandler("playlist/1111142221?limit=15"));
     setTrendingNowLoaded(true);
 
     await setPopularPlaylists(await fetchAlbumDataHandler("chart"));
@@ -106,16 +107,15 @@ function TrendingTabContent(props) {
         </div>
         <div id="popular-albums-container" className="mb-0 mb-xl-4">
           <div id="popular-albums-row" className="row mb-0 mb-xl-4">
-            {popularAlbumsLoaded ? (
-              popularAlbums.map((album, index) => <HomeAlbumCard key={index} album={album} />)
-            ) : (
-              <>
-                <h5 className="d-inline-block mb-0 mr-2 ml-3" style={{ color: "white" }}>
-                  Loading...
-                </h5>
-                <Spinner animation="border" variant="primary" disabled />
-              </>
-            )}
+            {popularAlbumsLoaded
+              ? popularAlbums.map((album, index) => <HomeAlbumCard key={index} album={album} />)
+              : [...Array(popularAlbums.length)].map((loader) => (
+                  <Col sm={12} md={6} lg={4} xl={3} className="col-xxl-2 mb-2 pr-3 pr-md-2 px-lg-2 fade-in">
+                    <SkeletonTheme color="rgba(255,255,255,0.05)" highlightColor="rgba(255,255,255,0.08)">
+                      <Skeleton height={308} />
+                    </SkeletonTheme>
+                  </Col>
+                ))}
           </div>
         </div>
         <div className="album-header-wrapper d-flex justify-content-between align-items-center">
@@ -123,18 +123,17 @@ function TrendingTabContent(props) {
         </div>
         <div id="trending-now-albums-container" className="mb-0 mb-xl-4">
           <div id="trending-now-row" className="row mb-0 mb-0 mb-xl-4">
-            {trendingNowLoaded ? (
-              trendingNow
-                .filter((e) => e !== undefined)
-                .map((album, index) => <HomeAlbumCard key={index} album={album} />)
-            ) : (
-              <>
-                <h5 className="d-inline-block mb-0 mr-2 ml-3" style={{ color: "white" }}>
-                  Loading...
-                </h5>
-                <Spinner animation="border" variant="primary" disabled />
-              </>
-            )}
+            {trendingNowLoaded
+              ? trendingNow
+                  .filter((e) => e !== undefined)
+                  .map((album, index) => <HomeAlbumCard key={index} album={album} />)
+              : [...Array(trendingNow.length)].map((loader) => (
+                  <Col sm={12} md={6} lg={4} xl={3} className="col-xxl-2 mb-2 pr-3 pr-md-2 px-lg-2 fade-in">
+                    <SkeletonTheme color="rgba(255,255,255,0.05)" highlightColor="rgba(255,255,255,0.08)">
+                      <Skeleton height={308} />
+                    </SkeletonTheme>
+                  </Col>
+                ))}
           </div>
         </div>
         <div className="album-header-wrapper d-flex justify-content-between align-items-center">
@@ -142,18 +141,17 @@ function TrendingTabContent(props) {
         </div>
         <div id="popular-playlists-container" className="mb-0 mb-xl-4">
           <div id="popular-playlists-row" className="row mb-0 mb-xl-4">
-            {popularPlaylistsLoaded ? (
-              popularPlaylists
-                .filter((e) => e !== undefined)
-                .map((playlist, index) => <HomePlaylistAlbumCard key={index} playlist={playlist} />)
-            ) : (
-              <>
-                <h5 className="d-inline-block mb-0 mr-2 ml-3" style={{ color: "white" }}>
-                  Loading...
-                </h5>
-                <Spinner animation="border" variant="primary" disabled />
-              </>
-            )}
+            {popularPlaylistsLoaded
+              ? popularPlaylists
+                  .filter((e) => e !== undefined)
+                  .map((playlist, index) => <HomePlaylistAlbumCard key={index} playlist={playlist} />)
+              : [...Array(popularPlaylists.length)].map((loader) => (
+                  <Col sm={12} md={6} lg={4} xl={3} className="col-xxl-2 mb-2 pr-3 pr-md-2 px-lg-2 fade-in">
+                    <SkeletonTheme color="rgba(255,255,255,0.05)" highlightColor="rgba(255,255,255,0.08)">
+                      <Skeleton height={308} />
+                    </SkeletonTheme>
+                  </Col>
+                ))}
           </div>
         </div>
       </div>
